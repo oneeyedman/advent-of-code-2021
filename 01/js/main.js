@@ -22,15 +22,34 @@ function getTotalDepthIncreases(data) {
 }
 
 
-async function test(input) {
+function formatSlidingWindow(data) {
+	const WINDOW_SIZE = 3;
+	const slidingWindowData = [];
 
-	const puzzle = await getPuzzle(input);
-	const trendingDepths = mapTrendingDepths(puzzle);
-	console.log(trendingDepths);
-	console.log(getTotalDepthIncreases(puzzle));
+	for (let i = 0; i < data.length - (WINDOW_SIZE - 1); i++) {
+		let measurement = 0;
+
+		for (let j = 0; j < WINDOW_SIZE; j++) {
+			measurement += data[i + j];
+		}
+
+		slidingWindowData.push(measurement);
+	}
+
+	return slidingWindowData;
 }
 
-// test(PUZZLE_URL_TEST);
-// test(PUZZLE_URL);
+
+function getNewTotalDephIncreases(data) {
+	const result = formatSlidingWindow(data);
+	return getTotalDepthIncreases(result);
+}
+
+
+async function test(input) {
+	//const puzzle = (await getPuzzle(input)).map(Number);
+}
+
+
 writeResult(PUZZLE_URL, result1, getTotalDepthIncreases);
-// writeResult(puzzleURL, result2, calculateTotalRequiredFuel);
+writeResult(PUZZLE_URL, result2, getNewTotalDephIncreases);

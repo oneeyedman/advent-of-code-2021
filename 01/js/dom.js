@@ -7,7 +7,10 @@ const result2 = page.querySelector('#result-2');
 function getPuzzle(puzzleURL) {
 	return fetch(puzzleURL)
 		.then(res => res.text())
-		.then(puzzle => puzzle.split('\n').filter(Boolean));
+		.then(puzzle => puzzle.split('\n')
+			.filter(Boolean)
+			.map(Number)
+		);
 }
 
 
