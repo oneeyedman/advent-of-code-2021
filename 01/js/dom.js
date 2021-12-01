@@ -7,7 +7,7 @@ const result2 = page.querySelector('#result-2');
 function getPuzzle(puzzleURL) {
 	return fetch(puzzleURL)
 		.then(res => res.text())
-		.then(puzzle => puzzle.split('\n'));
+		.then(puzzle => puzzle.split('\n').filter(Boolean));
 }
 
 
@@ -23,5 +23,6 @@ async function writeResult(dataURL, element, fn) {
 export {
 	result1,
 	result2,
-	writeResult
+	writeResult,
+	getPuzzle
 };

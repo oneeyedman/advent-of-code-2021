@@ -1,37 +1,36 @@
-import { result1, result2, writeResult } from './dom.js';
+import { result1, result2, writeResult, getPuzzle } from './dom.js';
 
 // Input: https://adventofcode.com/2021/day/1/input
-const puzzleURL = 'data/data.txt';
+const PUZZLE_URL = 'data/data.txt';
+const PUZZLE_URL_TEST = 'data/test-data.txt';
 
 
-const arrToFuel = (fuel, acc) => fuel + acc;
+function mapTrendingDepths(data) {
+	return data.map((depth, i) => {
+		const diff = depth - data[i - 1];
+		return {
+			depth: depth,
+			trend: i === 0 ? 0 : Math.sign(diff)
+		};
+	});
+}
 
 
-const calculateRequiredFuelPerMass = mass => Math.floor(mass/3) - 2;
+function getTotalDepthIncreases(data) {
+	const trendingDepths = mapTrendingDepths(data);
+	return trendingDepths.filter(item => item.trend === 1).length;
+}
 
 
-const calculateRequiredFuel = samples => samples.map(moduleMass => calculateRequiredFuelPerMass(moduleMass)).reduce(arrToFuel);
+async function test(input) {
 
+	const puzzle = await getPuzzle(input);
+	const trendingDepths = mapTrendingDepths(puzzle);
+	console.log(trendingDepths);
+	console.log(getTotalDepthIncreases(puzzle));
+}
 
-const calculateExtraFuel = totalFuel => {
-	const extraFuel = [];
-	let fuel = calculateRequiredFuelPerMass(totalFuel);
-	while (fuel > 0) {
-		extraFuel.push(fuel);
-		fuel = calculateRequiredFuelPerMass(fuel);
-	}
-	return extraFuel.reduce(arrToFuel);
-};
-
-
-const calculateTotalRequiredFuel = samples => {
-	const result = samples.map(sample => calculateExtraFuel(sample)).reduce(arrToFuel);
-	return result;
-};
-
-
-
-
-
-// writeResult(puzzleURL, result1, calculateRequiredFuel);
+// test(PUZZLE_URL_TEST);
+// test(PUZZLE_URL);
+writeResult(PUZZLE_URL, result1, getTotalDepthIncreases);
 // writeResult(puzzleURL, result2, calculateTotalRequiredFuel);

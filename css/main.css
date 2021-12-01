@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
 body {
-  background: #222222;
-  background: #0f0f23;
+	background: #222222;
+	background: #0f0f23;
 	color: #c0c0c0;
 	font-family: 'Source Code Pro', monospace;
 	margin: 0;
@@ -32,6 +32,9 @@ body {
 
 /* HEADER */
 .page__header {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
 	padding: 2em 0;
 	position: relative;
 }
@@ -119,6 +122,29 @@ a.puzzle__link:hover {
 
 
 /* DAYS */
+
+.title {
+	margin-bottom: 0;
+	position: relative;
+}
+
+.title::after {
+	color: #ffff65;
+	content: '';
+	left: 100%;
+	margin-left: .25em;
+	position: absolute;
+	top: -.5em;
+}
+
+.title--star::after {
+	content: '*';
+}
+
+.title--stars::after {
+	content: '**';
+}
+
 .part + .part {
 	margin-top: 4em;
 }
@@ -135,13 +161,13 @@ a.puzzle__link:hover {
 	color: #025eea;
 	font-size: 1.5em;
 	margin: 1em auto;
-	padding: .5em;
 	overflow-x: auto;
-	overflow-y:hidden;
+	overflow-y: hidden;
+	padding: .5em;
 }
 @media all and (min-width: 768px) {
-  .part__result {
-    width: 40%;
+	.part__result {
+		width: 40%;
 	}
 }
 
