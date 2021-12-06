@@ -69,6 +69,17 @@ body {
 	content: '<';
 	margin-right: .5em;
 }
+.page__the-code {
+	position: absolute;
+	left: 100%;
+	top: 1em;
+	width: 40px;
+	height: 1px;
+	padding-top: 39px;
+	overflow: hidden;
+	background: url(../assets/icons/github.svg) center no-repeat;
+	transform: translateX(-50%);
+}
 
 
 
